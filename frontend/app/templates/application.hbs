@@ -1,0 +1,55 @@
+
+  <div class="container">
+    <div class="row">
+      <div class="span6 offset3">
+        <header class="app-header">
+          <h1 class="app-title">todos</h1>
+        </header>
+        {{outlet}}
+      </div>
+      <div class="span6 offset3">
+        <div class="info">
+          <p>Double-click a todo to edit</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <form {{action "createTodo" on="submit"}}>
+      {{input id="new-todo" class="input-todo input-block-level" placeholder="What needs to be done?" value=todoText}}
+    </form>
+    <ul class="todo-list unstyled">
+      {{#each controller itemController="todo"}}
+        <li {{bind-attr class=":clearfix isCompleted:completed"}}>
+          {{#if isEditing}}
+            {{edit-todo class="input-block-level" value=bufferedText insert-newline="doneEditing" focus-out="cancelEditing" escape-press="cancelEditing"}}
+          {{else}}
+            {{input type="checkbox" class="todo-checkbox" checked=isCompleted}}
+            <span class="todo" {{action "editTodo" on="doubleClick"}}>{{text}}</span>
+            <button class="delete" {{action "deleteTodo"}}><i class="icon-trash"></i></button>
+          {{/if}}
+        </li>
+      {{else}}
+        <p>No todos to show here!</p>
+      {{/each}}
+    </ul>
+  </div>
+  <footer class="details clearfix">
+            <span class="remaining pull-left">
+                <strong>{{remaining.length}}</strong> {{pluralize 'item' remaining.length}} left
+            </span>
+    <ul class="filters unstyled pull-right">
+      <li>
+        {{#link-to "todos.index"}}All{{/link-to}}
+      </li>
+      <li>
+        {{#link-to "todos.completed"}}Completed{{/link-to}}
+      </li>
+      <li>
+        {{#link-to "todos.remaining"}}Remaining{{/link-to}}
+      </li>
+    </ul>
+    <span class="order pull-right">
+                Order <a href="#"  {{action "orderToggle"}}></a>
+            </span>
+  </footer>
