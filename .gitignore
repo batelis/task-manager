@@ -1,2 +1,75 @@
 ".idea"
 storage/
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+dist/
+tmp/
+
+# dependencies
+node_modules/
+bower_components/
+
+# misc
+.sass-cache/
+connect.lock/
+coverage/*
+libpeerconnection.loggit remote add origin https://github.com/batelis/task-manager.git
+npm-debug.log*
+yarn-error.log
+testem.log
+
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
+
+/common-tmp/
+/coverage/
+/.nyc_output/
+/docs/build/
+/node_modules/
+/tmp/
+/.deps-tmp/
+*.log
+*.tgz
+*.pem
+.DS_Store
+
+
+# compiled output
+/dist/
+/tmp/
+
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/.vscode
+/nbproject
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
+.phpunit.result.cache
+# dependencies
+/bower_components/
+/node_modules/
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/
+/libpeerconnection.log
+/npm-debug.log*
+/testem.log
+/yarn-error.log
+
+# ember-try
+/.node_modules.ember-try/
+/bower.json.ember-try
+/package.json.ember-try

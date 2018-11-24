@@ -27,5 +27,5 @@ $api->version('v1',function($api){
 
 // Catchall - Displays Ember app
 Route::any('{catchall}',function(){
-    return view('index');
+    return view('welcome');
 })->where('catchall', '(.*)');
