@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Task;
 use App\repositories\TaskRepository;
+use Dingo\Api\Exception\StoreResourceFailedException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class TaskController extends Controller
 {
@@ -43,7 +46,15 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        $data=$request->validated();
+
+        $data   =   $request->get('data')['attributes'];
+        $validator  =   Validator::make($data,[
+            "text"=>"required| string",
+            "is_complete"=>"nullable| boolean"
+        ]);
+        if($validator->fails()){
+            throw new StoreResourceFailedException('Invalid user data',$validator->errors());
+        }
         return response()->json($this->repository->store($data));
 
     }
@@ -73,13 +84,20 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param TaskRequest $request
+     * @param Request $request
      * @param  \App\Task $Task
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskRequest $request, Task $Task)
+    public function update(Request $request, Task $Task)
     {
-        $data=$request->validated();
+        $data   =   $request->get('data')['attributes'];
+        $validator  =   Validator::make($data,[
+            "text"=>"required| string",
+            "is_complete"=>"nullable| boolean"
+        ]);
+        if($validator->fails()){
+            throw new StoreResourceFailedException('Invalid user data',$validator->errors());
+        }
         return response()->json($this->repository->update($data, $Task));
     }
 
